@@ -1,0 +1,29 @@
+# ============================================================
+# 任职资格智能评价系统 - 内网离线部署配置
+#
+# 使用方式：
+#   1. 将本文件 + .env + qualification-eval.tar 拷入内网机器
+#   2. docker load -i qualification-eval.tar
+#   3. docker compose -f docker-compose.intranet.yml up -d
+# ============================================================
+services:
+  app:
+    image: qualification-eval-app:latest
+    container_name: hr-rzzg
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_API_KEY=${LLM_API_KEY:-sk-placeholder}
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://localhost:8000/v1}
+      - LLM_MODEL=${LLM_MODEL:-qwen2.5-72b-instruct}
+      - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-8192}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.3}
+    volumes:
+      - ./demo:/app/demo
+      - uploads:/app/uploads
+      - data:/app/data
+    restart: unless-stopped
+
+volumes:
+  uploads:
+  data:

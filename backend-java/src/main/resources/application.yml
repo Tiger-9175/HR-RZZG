@@ -1,0 +1,20 @@
+server:
+  port: 8000
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+llm:
+  api-key: sk-placeholder
+  base-url: https://api.deepseek.com
+  model: deepseek-v4-flash
+  max-tokens: 8192
+  temperature: 0.3
+
+app:
+  upload-dir: uploads
+  data-dir: data
+  demo-dir: demo

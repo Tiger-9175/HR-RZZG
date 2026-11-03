@@ -1,0 +1,25 @@
+# ============================================================
+# 昌飞任职资格智能评价系统 - Java版 Docker Compose
+# ============================================================
+services:
+  app:
+    build:
+      context: .
+      dockerfile: backend-java/Dockerfile
+    container_name: hr-rzzg-java
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_API_KEY=${LLM_API_KEY:-sk-placeholder}
+      - LLM_BASE_URL=${LLM_BASE_URL:-https://api.deepseek.com}
+      - LLM_MODEL=${LLM_MODEL:-deepseek-chat}
+      - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-8192}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.3}
+    volumes:
+      - uploads:/app/uploads
+      - data:/app/data
+    restart: unless-stopped
+
+volumes:
+  uploads:
+  data:

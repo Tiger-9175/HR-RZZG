@@ -1,0 +1,33 @@
+# ============================================================
+# Docker Compose for 任职资格智能评价系统
+# 支持内网离线部署
+# ============================================================
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hr-rzzg
+    ports:
+      - "8000:8000"
+    environment:
+      # LLM Configuration - modify according to your setup
+      - LLM_API_KEY=${LLM_API_KEY:-sk-placeholder}
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://host.docker.internal:8000/v1}
+      - LLM_MODEL=${LLM_MODEL:-qwen2.5-72b-instruct}
+      - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-8192}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.3}
+    volumes:
+      # Mount demo data directory
+      - ./demo:/app/demo
+      # Persist uploads
+      - uploads:/app/uploads
+      # Data directory
+      - data:/app/data
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  uploads:
+  data:

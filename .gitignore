@@ -1,0 +1,46 @@
+# ============================================================
+# HR-RZZG - 上传前排除清单
+# ============================================================
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# ---- Node / 前端 ----
+node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# ---- 运行时数据（含个人信息，禁止提交） ----
+data/*.db
+data/*.db-journal
+data/reports/
+data/llm_config*.json
+uploads/
+logs/
+
+# ---- 环境变量与密钥 ----
+.env
+.env.*
+!.env.example
+
+# ---- 构建产物与离线包 ----
+backend-java/target/
+*.tar
+*.tar.gz
+*.zip
+
+# ---- 冗余数据（不随仓库分发，demo/ 已保留） ----
+backup-python/
+人工智能赋能人才动态评估项目数据（公开）/
+
+# ---- 编辑器 / 系统 ----
+.idea/
+.vscode/
+.claude/settings.local.json
+.DS_Store
+Thumbs.db
