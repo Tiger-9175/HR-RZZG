@@ -21,7 +21,6 @@ RUN mvn package -DskipTests -B
 FROM eclipse-temurin:8-jre
 WORKDIR /app
 COPY --from=backend-builder /build/target/hr-rzzg.jar app.jar
-COPY demo/ ./demo/
 RUN mkdir -p uploads data
 
 EXPOSE 8000
